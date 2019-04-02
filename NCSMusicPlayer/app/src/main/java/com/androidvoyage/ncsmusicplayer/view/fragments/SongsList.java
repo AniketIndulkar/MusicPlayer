@@ -88,7 +88,7 @@ public class SongsList extends Fragment {
                         .getApplication())
                 .create(SongListViewModel.class);
 
-        Log.d(TAG, "onCreateView: "+songListViewModel.getPlayList(Environment.DIRECTORY_DOWNLOADS));
+        Log.d(TAG, "onCreateView: "+songListViewModel.getPlayList(Environment.getExternalStorageDirectory().getPath()));
 
         textView.setText(mParam1);
         return view;

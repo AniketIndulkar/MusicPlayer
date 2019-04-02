@@ -2,6 +2,7 @@ package com.androidvoyage.ncsmusicplayer.view.viewmodels;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.provider.MediaStore;
 
@@ -30,9 +31,18 @@ public class SongListViewModel extends ViewModel {
                         break;
                     }
                 } else if (file.getName().endsWith(".mp3")) {
+                    MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+                    mmr.setDataSource(file.getPath());
                     HashMap<String, String> song = new HashMap<>();
-                    song.put("file_path", file.getAbsolutePath());
-                    song.put("file_name", file.getName());
+                    song.put("filePath", file.getAbsolutePath());
+                    song.put("fileName", file.getName());
+                    song.put("albumName", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
+                    song.put("artist", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST));
+                    song.put("author", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_AUTHOR));
+                    song.put("bitRate", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE));
+                    song.put("duration", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+                    song.put("title", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
+                    song.put("hasImage", mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_HAS_IMAGE));
                     fileList.add(song);
                 }
             }
