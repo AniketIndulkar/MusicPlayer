@@ -1,24 +1,17 @@
 package com.androidvoyage.ncsmusicplayer.view.activities;
 
 import android.net.Uri;
-
-import androidx.annotation.NonNull;
-
-import com.androidvoyage.ncsmusicplayer.view.base.BaseActivity;
-import com.androidvoyage.ncsmusicplayer.view.viewmodels.MainViewModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.androidvoyage.ncsmusicplayer.R;
+import com.androidvoyage.ncsmusicplayer.view.base.BaseActivity;
 import com.androidvoyage.ncsmusicplayer.view.fragments.SongsList;
+import com.androidvoyage.ncsmusicplayer.view.viewmodels.MainViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.lifecycle.ViewModel;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
