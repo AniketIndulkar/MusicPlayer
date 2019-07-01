@@ -57,12 +57,9 @@ public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.So
                     holder.ivSongImage.setImageBitmap(bitmap); //associated cover art in bitmap
                 });
             } else {
-                new Handler(Looper.myLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        holder.ivSongImage.setImageResource(R.drawable.ic_launcher_background); //any default cover resourse folder
-                    }
-                });
+//                new Handler(Looper.getMainLooper()).post(() -> {
+//                    holder.ivSongImage.setImageResource(R.drawable.ic_launcher_background); //any default cover resourse folder
+//                });
             }
         }).start();
 
