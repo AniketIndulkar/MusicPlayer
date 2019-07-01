@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements SongsList.OnFragmentInteractionListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
 
     @BindView(R.id.bottomNavigation)
@@ -44,10 +44,6 @@ public class MainActivity extends BaseActivity implements SongsList.OnFragmentIn
                 , "NCS_Songs");
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
