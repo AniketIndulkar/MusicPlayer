@@ -3,6 +3,11 @@ package com.androidvoyage.ncsmusicplayer.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.drawable.PaintDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.media.MediaMetadataRetriever;
 import android.os.Handler;
 import android.os.Looper;
@@ -46,6 +51,30 @@ public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.So
         holder.tvSongAlbum.setText(mData.get(position).get(AppConstants.ALBUM));
         holder.tvSongDuration.setText(mData.get(position).get(AppConstants.Duration) + "m");
 
+//        ShapeDrawable.ShaderFactory shaderFactory = new ShapeDrawable.ShaderFactory() {
+//            @Override
+//            public Shader resize(int width, int height) {
+//                LinearGradient linearGradient = new LinearGradient(0, 0, width, height,
+//                        new int[]{
+//                                0xFFFFFFFF,
+//                                0xFFFFFFFF,
+//                                0xFFFFFFFF,
+//                                0xB3000000,
+//                                0x66000000,
+//                                0x1A000000,
+//                                0x00FFFFFF}, //substitute the correct colors for these
+//                        new float[]{
+//                                0, 0.40f, 0.60f,0.70f,0.80f,0.90f, 1},
+//                        Shader.TileMode.REPEAT);
+//                return linearGradient;
+//            }
+//        };
+//        PaintDrawable paint = new PaintDrawable();
+//        paint.setShape(new RectShape());
+//        paint.setShaderFactory(shaderFactory);
+//
+//        holder.gradientView.setBackgroundDrawable(paint);
+
 
         new Thread(() -> {
             MediaMetadataRetriever mmr = new MediaMetadataRetriever();
@@ -55,11 +84,12 @@ public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.So
                 Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                 new Handler(Looper.getMainLooper()).post(() -> {
                     holder.ivSongImage.setImageBitmap(bitmap); //associated cover art in bitmap
+                    holder.ivSongImage.setVisibility(View.VISIBLE);
                 });
             } else {
-//                new Handler(Looper.getMainLooper()).post(() -> {
-//                    holder.ivSongImage.setImageResource(R.drawable.ic_launcher_background); //any default cover resourse folder
-//                });
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    holder.ivSongImage.setVisibility(View.GONE);
+                });
             }
         }).start();
 
@@ -76,6 +106,7 @@ public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.So
     public class SongsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvSongName, tvSongAlbum, tvSongDuration;
         ImageView ivSongImage;
+        View gradientView;
 
         SongsViewHolder(View itemView) {
             super(itemView);
@@ -83,6 +114,7 @@ public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.So
             tvSongAlbum = itemView.findViewById(R.id.tvSongAlbum);
             tvSongDuration = itemView.findViewById(R.id.tvSongDuration);
             ivSongImage = itemView.findViewById(R.id.ivSongImage);
+            gradientView = itemView.findViewById(R.id.gradientView);
             itemView.setOnClickListener(this);
         }
 

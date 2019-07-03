@@ -66,7 +66,13 @@ public class SongManager {
             MediaMetadataRetriever mmr = new MediaMetadataRetriever();
             mmr.setDataSource(song.getPath());
             HashMap<String, String> songMap = new HashMap<>();
-            songMap.put(AppConstants.SONG_TITLE, mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
+
+            if (mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE) != null) {
+                songMap.put(AppConstants.SONG_TITLE, mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE));
+            } else {
+                songMap.put(AppConstants.SONG_TITLE, song.getName());
+            }
+
             songMap.put(AppConstants.SONG_PATH, song.getPath());
             songMap.put(AppConstants.ALBUM, mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM));
             songMap.put(AppConstants.Duration, convertToMinute(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)));
