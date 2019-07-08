@@ -1,10 +1,13 @@
 package com.androidvoyage.ncsmusicplayer.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.androidvoyage.ncsmusicplayer.R;
 import com.androidvoyage.ncsmusicplayer.adapters.LocalSongsAdapter;
 import com.androidvoyage.ncsmusicplayer.manager.SongManager;
+import com.androidvoyage.ncsmusicplayer.utils.AppConstants;
+import com.androidvoyage.ncsmusicplayer.view.activities.PlaySongActivity;
 import com.androidvoyage.ncsmusicplayer.view.viewmodels.SongListViewModel;
 
 import java.util.ArrayList;
@@ -32,6 +37,13 @@ public class SongsList extends Fragment implements LocalSongsAdapter.ItemClickLi
 
     @BindView(R.id.rvLocalMusic)
     RecyclerView rvLocalMusic;
+
+    @BindView(R.id.songsListProgress)
+    ProgressBar songsListProgress;
+
+    @BindView(R.id.tvNoSongs)
+    TextView tvNoSongs;
+
     LocalSongsAdapter adapter;
 
     private String TAG = SongsList.class.getSimpleName();
@@ -80,6 +92,31 @@ public class SongsList extends Fragment implements LocalSongsAdapter.ItemClickLi
 
     }
 
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Intent playSong = new Intent(getActivity(), PlaySongActivity.class);
+        playSong.putExtra(AppConstants.SONG_DATA, songsListData.get(position));
+        startActivity(playSong);
+    }
+
+    @Override
+    public void allSongsLoaded(ArrayList<HashMap<String, String>> songs) {
+        if (songs != null) {
+            if (songs.size() > 0) {
+                songsListProgress.setVisibility(View.GONE);
+                songsListData = songs;
+                setUpSongsRecyclerView();
+            } else {
+                songsListProgress.setVisibility(View.GONE);
+                tvNoSongs.setVisibility(View.VISIBLE);
+            }
+        } else {
+            songsListProgress.setVisibility(View.GONE);
+            tvNoSongs.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void setUpSongsRecyclerView() {
         rvLocalMusic.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new LocalSongsAdapter(getActivity(), songsListData);
@@ -88,16 +125,5 @@ public class SongsList extends Fragment implements LocalSongsAdapter.ItemClickLi
         rvLocalMusic.addItemDecoration(itemDecor);
         rvLocalMusic.setAdapter(adapter);
         rvLocalMusic.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onItemClick(View view, int position) {
-
-    }
-
-    @Override
-    public void allSongsLoaded(ArrayList<HashMap<String, String>> songs) {
-        songsListData = songs;
-        setUpSongsRecyclerView();
     }
 }

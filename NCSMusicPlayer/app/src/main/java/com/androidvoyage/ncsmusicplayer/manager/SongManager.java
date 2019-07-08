@@ -89,6 +89,6 @@ public class SongManager {
         Integer duration = Integer.parseInt(extractMetadata);
         long minutes = (duration / 1000) / 60;
         long seconds = (duration / 1000) % 60;
-        return String.valueOf(minutes) + "." + String.valueOf(seconds);
+        return minutes + "." + seconds;
     }
 }

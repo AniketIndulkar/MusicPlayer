@@ -18,7 +18,8 @@
         android:id="@+id/ivSongImage"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
 
     <View
         android:id="@+id/gradientView"

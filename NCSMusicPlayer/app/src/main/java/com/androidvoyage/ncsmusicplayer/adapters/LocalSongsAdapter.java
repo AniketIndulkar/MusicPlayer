@@ -76,22 +76,22 @@ public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.So
 //        holder.gradientView.setBackgroundDrawable(paint);
 
 
-        new Thread(() -> {
-            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-            mmr.setDataSource(mData.get(position).get(AppConstants.SONG_PATH));
-            byte[] data = mmr.getEmbeddedPicture();
-            if (data != null) {
-                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                new Handler(Looper.getMainLooper()).post(() -> {
-                    holder.ivSongImage.setImageBitmap(bitmap); //associated cover art in bitmap
-                    holder.ivSongImage.setVisibility(View.VISIBLE);
-                });
-            } else {
-                new Handler(Looper.getMainLooper()).post(() -> {
-                    holder.ivSongImage.setVisibility(View.GONE);
-                });
-            }
-        }).start();
+//        new Thread(() -> {
+//            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+//            mmr.setDataSource(mData.get(position).get(AppConstants.SONG_PATH));
+//            byte[] data = mmr.getEmbeddedPicture();
+//            if (data != null) {
+//                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+//                new Handler(Looper.getMainLooper()).post(() -> {
+//                    holder.ivSongImage.setImageBitmap(bitmap); //associated cover art in bitmap
+//                    holder.ivSongImage.setVisibility(View.VISIBLE);
+//                });
+//            } else {
+//                new Handler(Looper.getMainLooper()).post(() -> {
+//                    holder.ivSongImage.setVisibility(View.GONE);
+//                });
+//            }
+//        }).start();
 
     }
 

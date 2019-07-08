@@ -10,5 +10,6 @@ public class AppConstants {
     public static String BIT_RATE ="BitRate";
     public static String YEAR ="Year";
     public static String LOCATION ="Location";
+    public static String SONG_DATA ="SongData";
 
 }
