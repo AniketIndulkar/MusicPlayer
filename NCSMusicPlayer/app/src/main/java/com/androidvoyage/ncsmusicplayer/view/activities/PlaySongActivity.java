@@ -1,7 +1,5 @@
 package com.androidvoyage.ncsmusicplayer.view.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
@@ -11,13 +9,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.androidvoyage.ncsmusicplayer.R;
 import com.androidvoyage.ncsmusicplayer.utils.AppConstants;
 import com.androidvoyage.ncsmusicplayer.utils.Utils;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.IOException;
 import java.util.HashMap;

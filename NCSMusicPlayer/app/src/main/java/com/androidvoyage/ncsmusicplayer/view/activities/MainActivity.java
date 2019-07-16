@@ -2,6 +2,7 @@ package com.androidvoyage.ncsmusicplayer.view.activities;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -13,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -39,9 +41,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 .getInstance(getApplication())
                 .create(MainViewModel.class);
 
-        addFragment(R.id.mainContentLayout
+        replaceFragment(R.id.mainContentLayout
                 , SongsList.newInstance("NCS Music", "")
+                , "NCS_Songs"
                 , "NCS_Songs");
+
     }
 
 
@@ -60,13 +64,20 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                         , "Music"
                         , "Music");
                 break;
+            case R.id.action_user:
+                replaceFragment(R.id.mainContentLayout
+                        , SongsList.newInstance("User", "")
+                        , "User"
+                        , "User");
+                break;
             case R.id.action_settings:
                 replaceFragment(R.id.mainContentLayout
                         , SongsList.newInstance("Settings", "")
-                        , "Setting"
-                        , "Music");
+                        , "Settings"
+                        , "Settings");
                 break;
         }
+
         return true;
     }
 }

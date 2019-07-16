@@ -62,7 +62,7 @@ public class SongManager {
     }
 
     private void addSongToList(File song) {
-        if (song.getName().endsWith(mp3Pattern)) {
+        if (song.getName().endsWith(mp3Pattern) || song.getName().endsWith(".flac")) {
             MediaMetadataRetriever mmr = new MediaMetadataRetriever();
             mmr.setDataSource(song.getPath());
             HashMap<String, String> songMap = new HashMap<>();

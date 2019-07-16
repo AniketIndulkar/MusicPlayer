@@ -121,8 +121,8 @@ public class SongsList extends Fragment implements LocalSongsAdapter.ItemClickLi
         rvLocalMusic.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new LocalSongsAdapter(getActivity(), songsListData);
         adapter.setClickListener(this);
-        DividerItemDecoration itemDecor = new DividerItemDecoration(getActivity(), 1);
-        rvLocalMusic.addItemDecoration(itemDecor);
+//        DividerItemDecoration itemDecor = new DividerItemDecoration(getActivity(), 1);
+//        rvLocalMusic.addItemDecoration(itemDecor);
         rvLocalMusic.setAdapter(adapter);
         rvLocalMusic.setVisibility(View.VISIBLE);
     }

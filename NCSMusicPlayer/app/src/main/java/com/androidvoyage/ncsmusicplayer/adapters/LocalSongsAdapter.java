@@ -3,6 +3,7 @@ package com.androidvoyage.ncsmusicplayer.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.graphics.drawable.PaintDrawable;
@@ -23,6 +24,9 @@ import com.androidvoyage.ncsmusicplayer.utils.AppConstants;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.SongsViewHolder> {
@@ -54,7 +58,7 @@ public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.So
 //        ShapeDrawable.ShaderFactory shaderFactory = new ShapeDrawable.ShaderFactory() {
 //            @Override
 //            public Shader resize(int width, int height) {
-//                LinearGradient linearGradient = new LinearGradient(0, 0, width, height,
+//                LinearGradient linearGradient = new LinearGradient(0, 0, width, 0,
 //                        new int[]{
 //                                0xFFFFFFFF,
 //                                0xFFFFFFFF,
@@ -72,26 +76,22 @@ public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.So
 //        PaintDrawable paint = new PaintDrawable();
 //        paint.setShape(new RectShape());
 //        paint.setShaderFactory(shaderFactory);
-//
+
 //        holder.gradientView.setBackgroundDrawable(paint);
 
 
-//        new Thread(() -> {
-//            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-//            mmr.setDataSource(mData.get(position).get(AppConstants.SONG_PATH));
-//            byte[] data = mmr.getEmbeddedPicture();
-//            if (data != null) {
-//                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-//                new Handler(Looper.getMainLooper()).post(() -> {
-//                    holder.ivSongImage.setImageBitmap(bitmap); //associated cover art in bitmap
-//                    holder.ivSongImage.setVisibility(View.VISIBLE);
-//                });
-//            } else {
-//                new Handler(Looper.getMainLooper()).post(() -> {
-//                    holder.ivSongImage.setVisibility(View.GONE);
-//                });
-//            }
-//        }).start();
+        new Thread(() -> {
+            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+            mmr.setDataSource(mData.get(position).get(AppConstants.SONG_PATH));
+            byte[] data = mmr.getEmbeddedPicture();
+            if (data != null) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    holder.ivSongImage.setImageBitmap(bitmap); //associated cover art in bitmap
+                    holder.ivSongImage.setVisibility(View.VISIBLE);
+                });
+            }
+        }).start();
 
     }
 
@@ -106,7 +106,7 @@ public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.So
     public class SongsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvSongName, tvSongAlbum, tvSongDuration;
         ImageView ivSongImage;
-        View gradientView;
+        CardView mainCardView;
 
         SongsViewHolder(View itemView) {
             super(itemView);
@@ -114,7 +114,7 @@ public class LocalSongsAdapter extends RecyclerView.Adapter<LocalSongsAdapter.So
             tvSongAlbum = itemView.findViewById(R.id.tvSongAlbum);
             tvSongDuration = itemView.findViewById(R.id.tvSongDuration);
             ivSongImage = itemView.findViewById(R.id.ivSongImage);
-            gradientView = itemView.findViewById(R.id.gradientView);
+            mainCardView=itemView.findViewById(R.id.mainCardView);
             itemView.setOnClickListener(this);
         }
 
